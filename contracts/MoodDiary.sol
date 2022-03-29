@@ -1,16 +1,28 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
 
-contract MoodDiary {
-    string mood;
+contract HelloWorld {
+    uint256 number;
+    address public owner;
+    event NumberChanged(uint256 newNumber);
 
-    //function that writes a mood to the smart contract
-    function setMood(string memory _mood) public {
-        mood = _mood;
+    constructor() {
+        owner = msg.sender;
     }
 
-    //function that reads the mood from the smart contract
-    function getMood() public view returns (string memory) {
-        return mood;
+    function store(uint256 newNumber) public {
+        number = newNumber;
+        emit NumberChanged(newNumber);
     }
+
+    function retrieve() public view returns(uint256) {
+       return number;
+    }
+
+    function increment() public {
+        number = number + 4;
+        emit NumberChanged(number);
+
+    }
+
 }
